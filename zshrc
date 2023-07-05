@@ -70,3 +70,14 @@ export EDITOR=code
 
 # Set ipdb as the default Python debugger
 export PYTHONBREAKPOINT=ipdb.set_trace
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+
+# ALIAS INTEL/ARM
+alias arm="env /usr/bin/arch -arm64 /bin/zsh --login"
+
+alias intel="env /usr/bin/arch -x86_64 /bin/zsh --login"

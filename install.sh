@@ -23,13 +23,13 @@ symlink() {
 
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
-for name in aliases gitconfig irbrc rspec zprofile zshrc; do
-  if [ ! -d "$name" ]; then
-    target="$HOME/.$name"
-    backup $target
-    symlink $PWD/$name $target
-  fi
-done
+# for name in aliases gitconfig irbrc rspec zprofile zshrc; do
+#   if [ ! -d "$name" ]; then
+#     target="$HOME/.$name"
+#     backup $target
+#     symlink $PWD/$name $target
+#   fi
+# done
 
 # Install zsh-syntax-highlighting plugin
 CURRENT_DIR=`pwd`
@@ -62,12 +62,12 @@ for name in settings.json keybindings.json; do
 done
 
 # Symlink SSH config file to the present `config` file for macOS and add SSH passphrase to the keychain
-if [[ `uname` =~ "Darwin" ]]; then
-  target=~/.ssh/config
-  backup $target
-  symlink $PWD/config $target
-  ssh-add --apple-use-keychain ~/.ssh/id_ed25519
-fi
+# if [[ `uname` =~ "Darwin" ]]; then
+#   target=~/.ssh/config
+#   backup $target
+#   symlink $PWD/config $target
+#   ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+# fi
 
 # Refresh the current terminal with the newly installed configuration
 exec zsh

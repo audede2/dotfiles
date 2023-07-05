@@ -1,3 +1,6 @@
+[user]
+    name = Audrey Montegut
+    email = amontegut@kpler.com
 [color]
   branch = auto
   diff = auto
@@ -8,10 +11,13 @@
 [color "branch"]
   current = green
   remote = yellow
-
+[commit]
+    # show the current diff when committing
+    verbose = true
 [core]
   pager = less -FRSX
   editor = code --wait
+  autocrlf = input
 
 [alias]
   co = checkout
@@ -29,8 +35,7 @@
   # Get default branch name (copied from https://stackoverflow.com/a/67672350/14870317)
   defaultBranch = !git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4
 
-  # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
-  sweep = !git branch --merged $(git defaultBranch) | grep -E -v " $(git defaultBranch)$" | xargs -r git branch -d && git remote prune origin
+  sweep = !git branch --merged main | grep -v 'main$' | xargs git branch -d && git remote prune origin
 
   # http://www.jukie.net/bart/blog/pimping-out-git-log
   lg = log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'
@@ -49,7 +54,12 @@
   autocorrect = 1
 
 [push]
-  default = simple
+    # on git push, only push current branch to the remote one with same name
+    default = simple
+    # push annotated tags on the branch as well when pushing branch
+    followTags = true
+    # automatically create a remote branch if missing
+    autoSetupRemote = true
 
 [branch "master"]
   mergeoptions = --no-edit
